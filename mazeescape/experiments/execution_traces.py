@@ -14,7 +14,7 @@ and verifiable execution evidence.
 
 from __future__ import annotations
 
-from ...aima.search import (
+from aima.search import (
     GraphProblem,
     astar_search,
     greedy_best_first_graph_search,

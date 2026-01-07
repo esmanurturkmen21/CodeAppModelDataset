@@ -1,12 +1,9 @@
-Project-level main entry point for the MazeEscape+ project.
+"""Project-level main entry point for the MazeEscape+ project.
 
 This file provides a minimal CLI to:
   1) Validate the AIMA search core using the Romania route-finding problem
   2) Run Offline A* (full knowledge) on a grid-based maze
   3) Run Online / Repeated A* (partial knowledge) on a grid-based maze
-
-For domain-specific execution, see:
-  mazeescape/main.py
 
 For experiments, see:
   mazeescape/experiments/

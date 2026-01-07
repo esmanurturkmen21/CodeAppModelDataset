@@ -1,27 +1,12 @@
 """
-<<<<<<< HEAD
-maze_world.py
-Grid-based maze world representation for the MazeEscape+ project.
-
-Symbols:
-    'S' : start position
-    'G' : goal position
-    '#' : wall
-    '.' : free / walkable cell
-=======
 maze_grid_world.py
 
 Grid-based maze world with PARTIAL OBSERVABILITY.
 Produces PNG visualizations of the agent's belief map.
->>>>>>> 7be20c4 (Initial commit)
 """
 
 from __future__ import annotations
 
-<<<<<<< HEAD
-from typing import List, Optional, Tuple
-
-=======
 import matplotlib
 matplotlib.use("Agg")  # FORCE FILE OUTPUT (no GUI)
 
@@ -29,51 +14,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from typing import List, Optional, Tuple
->>>>>>> 7be20c4 (Initial commit)
 
 Coordinate = Tuple[int, int]
 
 
 class MazeWorld:
-<<<<<<< HEAD
-    """A simple 2D grid world loaded from a text file."""
-
-    def __init__(self, grid: List[List[str]]) -> None:
-        self.grid: List[List[str]] = grid
-        self.height: int = len(grid)
-        self.width: int = len(grid[0]) if grid else 0
-
-        self.start: Optional[Coordinate] = self._find_symbol("S")
-        self.goal: Optional[Coordinate] = self._find_symbol("G")
-
-    # ---------- construction / loading ----------
-
-    @classmethod
-    def from_file(cls, filepath: str) -> "MazeWorld":
-        """Load a maze from a given text file."""
-        with open(filepath, encoding="utf-8") as f:
-            lines = [line.rstrip("\n") for line in f if line.strip()]
-
-        grid = [list(row) for row in lines]
-        return cls(grid)
-
-    def _find_symbol(self, symbol: str) -> Optional[Coordinate]:
-        """Return the (x, y) coordinate of the first occurrence of a symbol."""
-        for y, row in enumerate(self.grid):
-            for x, cell in enumerate(row):
-                if cell == symbol:
-                    return x, y
-        return None
-
-    # ---------- basic queries ----------
-
-    def is_inside(self, x: int, y: int) -> bool:
-        """Return True if (x, y) is inside the grid bounds."""
-        return 0 <= y < self.height and 0 <= x < self.width
-
-    def is_wall(self, x: int, y: int) -> bool:
-        """Return True if the cell at (x, y) is a wall or outside the grid."""
-=======
     def __init__(self, grid: List[List[str]]) -> None:
         self.grid = grid
         self.height = len(grid)
@@ -99,49 +44,17 @@ class MazeWorld:
         for y, row in enumerate(self.grid):
             for x, cell in enumerate(row):
                 if cell == symbol:
-                    return (x, y)
+                    return x, y
         return None
 
     def is_inside(self, x: int, y: int) -> bool:
         return 0 <= y < self.height and 0 <= x < self.width
 
     def is_wall(self, x: int, y: int) -> bool:
->>>>>>> 7be20c4 (Initial commit)
         if not self.is_inside(x, y):
             return True
         return self.grid[y][x] == "#"
 
-<<<<<<< HEAD
-    def is_free(self, x: int, y: int) -> bool:
-        """Return True if the cell at (x, y) is inside and not a wall."""
-        return self.is_inside(x, y) and not self.is_wall(x, y)
-
-    def neighbors4(self, state: Coordinate) -> List[Coordinate]:
-        """Return valid 4-neighborhood (up, down, left, right) cells."""
-        x, y = state
-        candidates: List[Coordinate] = [
-            (x, y - 1),  # up
-            (x, y + 1),  # down
-            (x - 1, y),  # left
-            (x + 1, y),  # right
-        ]
-        return [(nx, ny) for nx, ny in candidates if self.is_free(nx, ny)]
-
-    # ---------- simple visualization ----------
-
-    def display(self, path: Optional[List[Coordinate]] = None) -> None:
-        """Print the grid, optionally marking a path with '*'."""
-        path_set = set(path) if path else set()
-
-        for y, row in enumerate(self.grid):
-            rendered_row = []
-            for x, cell in enumerate(row):
-                if (x, y) in path_set and cell not in ("S", "G"):
-                    rendered_row.append("*")
-                else:
-                    rendered_row.append(cell)
-            print("".join(rendered_row))
-=======
     def neighbors4(self, state: Coordinate):
         x, y = state
         candidates = [(x, y-1), (x, y+1), (x-1, y), (x+1, y)]
@@ -187,4 +100,3 @@ class MazeWorld:
         path = os.path.join(save_dir, f"{title_prefix}_{step_id}.png")
         plt.savefig(path, bbox_inches="tight")
         plt.close()
->>>>>>> 7be20c4 (Initial commit)

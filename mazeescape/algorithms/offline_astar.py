@@ -11,8 +11,8 @@ from __future__ import annotations
 from typing import Callable, Dict, List, Tuple
 
 from aima.search import Node, astar_search
-from ..environments.maze_grid_world import Coordinate, MazeWorld
-from ..problems.maze_grid_problem import MazeGridProblem
+from environments.maze_grid_world import Coordinate, MazeWorld
+from problems.maze_grid_problem import MazeGridProblem
 
 def offline_astar(
     world: MazeWorld,
